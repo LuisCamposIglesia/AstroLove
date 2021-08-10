@@ -1,0 +1,21 @@
+from django import forms
+from django.core.validators import RegexValidator
+
+CONTRASEÑA_REGEX = RegexValidator(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}',
+                                  'Escriba una contraseña entre 8 y 15 caracteres, al menos una letra minúscula, otra mayúscula, un número y un carácter especial.')
+
+
+class UserRegisterForm(forms.Form):
+    username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={'placeholder': 'Nombre'}))
+    last_name = forms.CharField(label="Apellidos",  widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
+    email = forms.EmailField(label="E-mail",  widget=forms.TextInput(attrs={'placeholder': 'E-mail', 'error_message':'Introduzca un e-mail válido'}))
+    password = forms.CharField(validators=[CONTRASEÑA_REGEX], label="Contraseña", widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
+    address = forms.CharField(label="Dirección", widget=forms.TextInput(attrs={'placeholder': 'Dirección'}))
+    city = forms.CharField(label="Ciudad", widget=forms.TextInput(attrs={'placeholder': 'Ciudad'}))
+
+class UserLoginForm(forms.Form):
+    username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
+    password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
+
+    
