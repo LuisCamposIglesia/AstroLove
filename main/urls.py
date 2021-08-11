@@ -28,4 +28,9 @@ urlpatterns = [
     path('eventos/', views.eventos),
     path('informacion/', views.informacion),
     path('logout/', views.logout),
+    path('perfil/update/', views.modificarPerfil),
+    path('posts/create/', views.create_post),
+    path('posts/show/<int:id>/', views.show_post),
+
+
 ]

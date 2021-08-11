@@ -1,8 +1,28 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
-<div class="container my-5 text-center">
-    <div class="row">
+
+<div class="container my-5">
+    <div class="row text-center my-3">
         <h1>POSTS</h1>
+        <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/posts/create/">Nuevo post</a></button>
     </div>
+    {% for post, likes in items %}
+    <div class="row justify-content-center my-5">
+        <div class="card w-50">
+            <img class="card-img-top w-50 img-fluid mx-auto"
+                src="http://127.0.0.1:8000/{{post.photo}}"
+                alt="Card image cap">
+            <div class="card-body text-justify">
+                <h5 class="card-title">{{post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{post.creator.nombreCompleto}}
+                    / {{post.date | date:'d-m-Y H:i'}}</h6>
+                <h5 class=""> <i class="fal fa-heart"></i>
+                    {{likes }}</h5>
+                <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/posts/show/{{post.id}}">Ver comentarios</a></button>
+
+            </div>
+        </div>
+    </div>
+    {% endfor%}
 </div>
 {% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'header_logged.html' %}
+{% block contenido %}
+<style>
+    input{
+        width: 100%;
+        height: 2.5rem;
+    }
+</style>
+<div class="container my-5 text-center">
+    <div class="row justify-content-center my-4">
+        <h1 class="subtitle text-uppercase text-center w-100">Nuevo post</h1>
+    </div>
+    <div class="row mb-5 justify-content-center">
+
+        {% if er_msg %}
+        <div class="alert alert-danger" style="width:100%">
+            <strong>{{er_msg}}</strong>
+        </div>
+        {% endif %}
+
+        {% if ex_msg %}
+        <div class="alert alert-success" style="width:100%">
+            <strong>{{ex_msg}}</strong>
+        </div>
+        {% endif %}
+
+        <form id='form' method='post' class="w-100" enctype='multipart/form-data'   >
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="w-50 my-3 mx-auto">
+                {{field.label}}
+                <div class="form-group w-100 my-3">
+                    {{ field }}
+                </div>
+                {% for error in field.errors %}
+                <p class="w-100 text-danger">{{ error|escape }}</p>
+
+                {% endfor %}
+            </div>
+            {% endfor %}
+            <div class="d-flex mx-auto w-25">
+                <input type='submit' class="btn btn-outline btn-primary mt-4"
+                    value='Confirmar'/>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

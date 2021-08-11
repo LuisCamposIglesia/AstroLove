@@ -6,7 +6,7 @@ class Usuario(models.Model):
     address = models.CharField(max_length=250)
     city = models.CharField(max_length=50)
     isDeleted = models.BooleanField()
-    profilePicUrl = models.CharField(max_length=250)
+    profilePicUrl = models.ImageField(upload_to="static/fotos_perfil/", blank=True)
     photo = models.CharField(max_length=550)
     isAccountNonExpired = models.BooleanField(default=False)
     isEnabled = models.BooleanField(default=False)
@@ -14,7 +14,7 @@ class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
-        return self.username + "," + self.user.first_name + " " + self.user.last_name
+        return self.user.username + "," + self.user.first_name + " " + self.user.last_name
     def nombreCompleto(self):
         return self.user.first_name + " " + self.user.last_name
 
@@ -32,15 +32,19 @@ class Evento(models.Model):
     title = models.CharField(max_length=30)
     date =  models.DateTimeField()
     description = models.CharField(max_length=250)
-    #apuntados = models.userField()
+    #apuntados = models.ManyToManyField(User, on_delete=models.CASCADE)
     photo = models.CharField(max_length=550)
 
+    
 class Post(models.Model):
     date =  models.DateTimeField()
     title = models.CharField(max_length=30)
-    photo = models.CharField(max_length=550)
-    like = models.IntegerField()
+    photo = models.ImageField(upload_to="static/post/")
     creator = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+class Like(models.Model):
+    user = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
 
 class Comment(models.Model):
     content = models.CharField(max_length=550)

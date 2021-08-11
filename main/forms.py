@@ -18,4 +18,19 @@ class UserLoginForm(forms.Form):
     username = forms.CharField(label="Nombre de usuario", widget=forms.TextInput(attrs={'placeholder': 'Nombre de usuario'}))
     password = forms.CharField(label="Contraseña", widget=forms.PasswordInput(attrs={'placeholder': 'Contraseña'}))
 
-    
+class EditProfile(forms.Form):
+    profilePhoto = forms.ImageField(label="Foto de perfil", required=False)
+    first_name = forms.CharField(label="Nombre", widget=forms.TextInput(attrs={'placeholder': 'Nombre'}))
+    last_name = forms.CharField(label="Apellidos",  widget=forms.TextInput(attrs={'placeholder': 'Apellidos'}))
+    email = forms.EmailField(label="E-mail",  widget=forms.TextInput(attrs={'placeholder': 'E-mail', 'error_message':'Introduzca un e-mail válido'}))
+    address = forms.CharField(label="Dirección", widget=forms.TextInput(attrs={'placeholder': 'Dirección'}))
+    city = forms.CharField(label="Ciudad", widget=forms.TextInput(attrs={'placeholder': 'Ciudad'}))
+
+class CreatePostForm(forms.Form):
+    title = forms.CharField(label="Título", widget=forms.TextInput(attrs={'placeholder': 'Título'}))
+    photo = forms.ImageField(label="Foto de la publicación", required=True)
+
+class CreateCommentForm(forms.Form):
+    content = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Escribe tu comentario'}))
+
+

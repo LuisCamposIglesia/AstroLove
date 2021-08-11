@@ -6,6 +6,7 @@ from .models import *
 
 admin.site.register(Usuario)
 admin.site.register(Message)
+admin.site.register(Like)
 admin.site.register(Post)
 admin.site.register(Comment)
 admin.site.register(Evento)
