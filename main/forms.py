@@ -33,4 +33,8 @@ class CreatePostForm(forms.Form):
 class CreateCommentForm(forms.Form):
     content = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Escribe tu comentario'}))
 
+class CreateEventoForm(forms.Form):
+    title = forms.CharField(label="Título", widget=forms.TextInput(attrs={'placeholder': 'Título'}))
+    description = forms.CharField(label="Descripción", widget=forms.Textarea(attrs={'placeholder': 'Descripción'}))
+    photo = forms.ImageField(label="Foto de la publicación", required=True)
 

@@ -164,7 +164,55 @@ def modificarPerfil(request):
 
 @login_required
 def eventos(request):
-    return render(request, 'eventos.html')
+    eventos = Evento.objects.all().order_by('-date')
+    lengths = []
+    for evento in eventos:
+     lengths.append(len(evento.apuntados.all()))   
+    items = zip(eventos, lengths)
+    return render(request, 'eventos.html', {'items':items})  
+    
+
+
+
+@login_required
+def create_evento(request):
+    if request.method == "POST":
+        form = CreateEventoForm(request.POST, request.FILES)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            photo = form.cleaned_data['photo']
+            date = datetime.now()
+            evento = Evento(title=title, description= description, photo=photo, date = date)
+            evento.save()   
+            return redirect("/eventos")
+        else:
+            return render(request, 'createEvento.html', {'form': form})
+    form = CreateEventoForm()
+    return render(request, 'createEvento.html',{'form': form})
+
+
+
+
+@login_required
+def show_evento(request, id):
+    # AQUI NO TE HACE FALTA UN FORMULARIO, YA QUE EXCLUSIVAMENTE VAS A MOSTRAR EL EVENTO
+    evento = Evento.objects.get(id=id)
+    apuntados = evento.apuntados.all()
+    current_user = Usuario.objects.get(user=request.user)
+    return render(request, 'showEvento.html', {'evento': evento, 'apuntados':apuntados, 'current_user':current_user })
+
+@login_required
+def new_apuntado(request, evento_id, user_id):
+    evento = Evento.objects.get(id=evento_id)
+    apuntados = evento.apuntados.all()
+    usuario = Usuario.objects.get(id=user_id)
+    if usuario not in apuntados:
+        apuntados |=  Usuario.objects.filter(id=user_id)
+        evento.apuntados.set( apuntados)
+        evento.save()
+    return redirect("/eventos/show/"+str(evento.id))
+
 
 @login_required
 def logout(request):

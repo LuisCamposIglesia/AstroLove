@@ -1,8 +1,40 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
-<div class="container my-5 text-center">
-    <div class="row">
-        <h1>EVENTOS</h1>
+
+<style>
+body {
+  height: 800px;
+  background-image: url("https://secure.static.tumblr.com/3d78d82495496789da6ff50e04ae67d3/wxhldnz/mb5nctknl/tumblr_static_tumblr_static_722loy9z270gggo0okg4w0occ_640.jpg");
+  background-size: cover;
+  background-size: 105rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  } 
+</style>
+<div class="container my-5">
+    <div class="row text-center my-3">
+        <h1>Eventos</h1>
+        <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/eventos/create/">Nuevo evento</a></button>
     </div>
+    {% for evento, length in items %}
+    <!--TIENES QUE LLAMAR AL NOMBRE DE LA VARIABLE QUE HAS PUESTO EN EL CONTROLADOR-->
+    <div class="row justify-content-center my-5">
+        <div class="card w-50">
+            <img class="card-img-top w-50 img-fluid mx-auto"
+                src="http://127.0.0.1:8000/{{evento.photo}}"
+                alt="Card image cap">
+            <div class="card-body text-justify">
+                <h5 class="card-title">{{evento.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{evento.description}}
+                    / {{evento.date | date:'d-m-Y H:i'}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted"><strong>Número de participantes: </strong>{{length}}</h6>
+                <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/eventos/show/{{evento.id}}">Ver detalles</a></button>
+            </div>
+        </div>
+    </div>
+    <!--Y CIERRA EL FOR-->
+    {% endfor %}
+
 </div>
 {% endblock %}

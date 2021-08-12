@@ -44,7 +44,7 @@
                 <hr class="w-100">
                 <div class="row">
                     <div class="col-4" style="background:
-                        url(http://127.0.0.1:8000/{{post.creator.profilePicUrl}})
+                        url(http://127.0.0.1:8000/{{comment.creator.profilePicUrl}})
                         50% 50% no-repeat; /* 50% 50% centers image in div */
                         width: 20px;
                         height: 20px;
@@ -52,7 +52,7 @@
 
                     </div>
                     <div class="col-8">
-                        <h6 class="card-subtitle mb-2 text-muted">{{post.creator.nombreCompleto}}
+                        <h6 class="card-subtitle mb-2 text-muted">{{comment.creator.nombreCompleto}}
                             / {{comment.time | date:'d-m-Y H:i'}}</h6>
                     </div>
                 </div>

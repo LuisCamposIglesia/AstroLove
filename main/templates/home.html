@@ -1,11 +1,36 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
+<style>
+
+body {
+  height: 800px;
+  background-image: url("https://f4.bcbits.com/img/a0026444545_10.jpg");
+  background-size: cover;
+  background-size: 110rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+
+</style>
+
+<body>
 <div class="container my-5 text-center">
-    <div class="row">
+    <div class="row" style="color: white">
         <h1>Bienvenido {{user.first_name}}</h1>
     </div>
-    <div class="row">
+    <div class="row" style="color: white">
         <p>Estamos encantados de volver a verte.</p>
     </div>
+<div style="color: white">
+  <p> Aquí podrás disponer de una amplia gama de funcionalidades que están a tu alcance en la barra superior<p>
+  <p> No te olvides de darle amor a las fotos que mas te gusten!!!<p>
 </div>
+<div>
+  <img border="2px" src="https://fotos02.noticiasdenavarra.com/2020/02/02/690x278/universo-billones.jpg" />
+</div>
+<div style="color: white">
+  <p>Un universo entero te está esperando!!!</p>
+</div>
+</div>
+</body>
 {% endblock %}

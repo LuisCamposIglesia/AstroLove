@@ -32,8 +32,8 @@ class Evento(models.Model):
     title = models.CharField(max_length=30)
     date =  models.DateTimeField()
     description = models.CharField(max_length=250)
-    #apuntados = models.ManyToManyField(User, on_delete=models.CASCADE)
-    photo = models.CharField(max_length=550)
+    apuntados = models.ManyToManyField(Usuario)
+    photo = models.ImageField(upload_to="static/eventos/", blank=True)
 
     
 class Post(models.Model):

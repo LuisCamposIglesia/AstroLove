@@ -1,32 +1,48 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
+
+<style>
+body {
+  height: 800px;
+  background-image: url("https://services.meteored.com/img/article/lunas-de-jupiter-podran-ser-habitables-vida-extraterrestre-planetas-321601-1_1280.jpg");
+  background-size: cover;
+  background-size: 105rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  } 
+</style>
+
+
+
+
 <div class="container">
-    <div class="row my-4">
+    <div class="row my-4" style="color: white">
         <h1>Mi perfil</h1>
     </div>
 </div>
 {% if not form %}
 <div class="container my-5">
     <div class="row mt-5">
-        <div class="col-lg-4 text-center">
+        <div class="col-lg-4 text-center" style="color: white">
             <img class="img-fluid w-50"
                 src="http://127.0.0.1:8000/{{usuario.profilePicUrl}}" alt="">
             <h3 class="my-4">Foto de perfil</h3>
         </div>
         <div class="col-lg-8 ml-5">
-            <div class="row mx-5">
+            <div class="row mx-5" style="color: white">
                 <p><strong>Nombre completo: </strong>{{usuario.nombreCompleto}}</p>
             </div>
-            <div class="row mx-5">
+            <div class="row mx-5" style="color: white">
                 <p><strong>Nombre de usuario: </strong>{{usuario.user.username}}</p>
             </div>
-            <div class="row mx-5">
+            <div class="row mx-5" style="color: white">
                 <p><strong>E-mail: </strong>{{usuario.user.email}}</p>
             </div>
-            <div class="row mx-5">
+            <div class="row mx-5" style="color: white">
                 <p><strong>Dirección: </strong>{{usuario.address}}</p>
             </div>
-            <div class="row mx-5">
+            <div class="row mx-5" style="color: white">
                 <p><strong>Ciudad: </strong>{{usuario.city}}</p>
             </div>
             <button type="button" class="btn btn-primary  mx-5 my-4 w-25">
