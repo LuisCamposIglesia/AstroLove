@@ -1,8 +1,54 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
-<div class="container my-5 text-center">
-    <div class="row">
+<div class="container-fluid py-5 text-white" id="background5">
+    <div class="row my-3 text-center">
         <h1>CHATS</h1>
     </div>
+    <div class="container my-4">
+        <form id='form' method='get'>
+            <div class="row">
+                {% for field in chatFilter.form %}
+                <div class="col-8 filter-row text-left">
+                    {{field.label}}
+                    {{field}}
+                </div>
+
+                {% endfor %}
+                <div class="col-4">
+                    <div class="row">
+                        <input type='submit' class="btn btn-primary w-50" value='Filtrar'/>
+                        <a href="/chats/" class="btn btn-danger w-25 rounded-0">
+                            Borrar filtros
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row my-3">
+        <div class="col-6 border">
+        {% for usuario in usuarios %}
+        {% if usuario.user.first_name %}
+        <div class="row border py-3">
+            <div class="col-4" style="background:
+                        url(http://127.0.0.1:8000/{{usuario.profilePicUrl}})
+                        50% 50% no-repeat; /* 50% 50% centers image in div */
+                        width: 30px;
+                        height: 30px;
+                        background-size: cover;">
+
+                    </div>
+            <div class="col-8">
+                <p class="my-auto"> {{usuario.user.first_name}} {{usuario.user.last_name}}</p>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        </div>
+        <div class="col-6 border text-center">
+            <h6 class="">Pulsa en un usuario para comenzar a chatear.</h6>
+        </div>
+    </div>
 </div>
+
 {% endblock %}

@@ -1,3 +1,4 @@
+from main.filters import ChatFilter, EventFilter
 from django.core.checks.messages import Error
 from .models import *
 from django.shortcuts import redirect, render
@@ -118,9 +119,26 @@ def show_post(request, id):
     form = CreateCommentForm()
     return render(request, 'showPost.html', {'post':post, 'likes':likes, 'comments':comments, 'form':form})
 
+
+@login_required
+def delete_post(request, id):
+    post = Post.objects.get(id=id)
+    post.delete()
+    return redirect("/posts/")
+
+@login_required
+def delete_comment(request, id):
+    comment = Comment.objects.get(id=id)
+    comment.delete()
+    return redirect("/posts/")
+
 @login_required
 def chats(request):
-    return render(request, 'chats.html')
+    usuarios = Usuario.objects.all()
+    chatFilter = ChatFilter(
+                request.GET, queryset=usuarios)
+    usuarios = chatFilter.qs  
+    return render(request, 'chats.html', {'usuarios':usuarios, 'chatFilter':chatFilter, 'user':request.user})
 
 @login_required
 def perfil(request):
@@ -166,10 +184,14 @@ def modificarPerfil(request):
 def eventos(request):
     eventos = Evento.objects.all().order_by('-date')
     lengths = []
+    eventFilter = EventFilter(
+                request.GET, queryset=eventos)
+    eventos = eventFilter.qs
+
     for evento in eventos:
      lengths.append(len(evento.apuntados.all()))   
     items = zip(eventos, lengths)
-    return render(request, 'eventos.html', {'items':items})  
+    return render(request, 'eventos.html', {'items':items, 'eventFilter': eventFilter})  
     
 
 
@@ -193,6 +215,14 @@ def create_evento(request):
 
 
 
+
+
+
+@login_required
+def delete_evento(request, id):
+    evento = Evento.objects.get(id=id)
+    evento.delete()
+    return redirect("/eventos/")
 
 @login_required
 def show_evento(request, id):

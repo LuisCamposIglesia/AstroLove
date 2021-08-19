@@ -1,33 +1,17 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
 
-<style>
-body {
-  height: 800px;
-  background-image: url("https://services.meteored.com/img/article/lunas-de-jupiter-podran-ser-habitables-vida-extraterrestre-planetas-321601-1_1280.jpg");
-  background-size: cover;
-  background-size: 105rem;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  } 
-</style>
 
-
-
-
-<div class="container">
+{% if not form %}
+<div class="container-fluid py-5" id="background5">
     <div class="row my-4" style="color: white">
         <h1>Mi perfil</h1>
     </div>
-</div>
-{% if not form %}
-<div class="container my-5">
     <div class="row mt-5">
         <div class="col-lg-4 text-center" style="color: white">
             <img class="img-fluid w-50"
                 src="http://127.0.0.1:8000/{{usuario.profilePicUrl}}" alt="">
-            <h3 class="my-4">Foto de perfil</h3>
+            <h3 class="my-4 text-white">Foto de perfil</h3>
         </div>
         <div class="col-lg-8 ml-5">
             <div class="row mx-5" style="color: white">
@@ -54,19 +38,22 @@ body {
 </div>
 {% endif %}
 {% if form %}
-<div class="container my-5">
+<div class="container-fluid py-5" id="background5">
+    <div class="row my-4" style="color: white">
+        <h1>Mi perfil</h1>
+    </div>
     <div class="row">
         <div class="col-4 text-center">
                 <img class="img-fluid w-50"
                     src="http://127.0.0.1:8000/{{usuario.profilePicUrl}}" alt="">
-                <h3 class="my-4">Foto de perfil</h3>
+                <h3 class="my-4 text-white">Foto de perfil</h3>
         </div>
         <div class="col-8">
             <form id='form' method='post' class="mx-5" enctype='multipart/form-data'>
                 {% csrf_token %}
                 {% for field, valor in items %}
                 {% if field.label != "Foto de perfil" %}
-                <div class="my-3">
+                <div class="my-3 text-white">
                     <strong><label for="field">{{field.label_tag}}</label></strong>
                     <input id="field" type="{{field.type}}" name="{{field.name}}"
                     value="{{valor}}">
@@ -76,7 +63,7 @@ body {
                 </div>
                 {% endif %}
                 {% if field.label == "Foto de perfil" %}
-                <div class="my-3">
+                <div class="my-3 text-white">
                     <strong><label for="field">{{field.label_tag}}</label></strong>
                     {{field}}
                     {% for error in field.errors %}

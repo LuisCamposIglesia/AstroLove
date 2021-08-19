@@ -1,5 +1,6 @@
 {% extends 'header.html' %}
 {% block contenido %}
+{% load static %}
 <style>
 
 .info-element{
@@ -15,14 +16,32 @@
 .div-inicio{
 		height: 20rem;
 	}
-	
+
 
 </style>
-<div class="video-wrapper" >
-    <video   autoplay muted loop class="w-100 position-absolute"
-			src="static\video_inicio\videoInicio.mp4"
-			type="video/mp4"></video>
-    <div class="d-flex justify-content-center align-items-center">
+<div class="container-fluid" style="background-color:black;">
+
+	<!--<div class="row">
+		<video autoplay muted loop class="w-100"
+		src="static\video_inicio\videoInicio.mp4"
+		type="video/mp4"></video>	
+	</div>-->
+	<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class="d-block w-100" src="static\video_inicio\slider1.jpg" alt="First slide">
+				<div class="carousel-caption d-none d-md-block">
+					<h1>AstrOLOve</h1>
+					<p>La red social que te llevará a tocar el cielo.</p>
+				  </div>
+			  </div>
+	  </div>
+	</div>
+</div>
+
+
+    
+    <!--<div class="d-flex justify-content-center align-items-center">
         <div
 				class="d-flex flex-column justify-content-center align-items-center"
 				style="z-index: 2;padding:0 1rem">
@@ -41,45 +60,55 @@
                 
                 
 		</div>
-    </div>
-</div>
-<div class="div-inicio d-flex justify-content-center align-items-center position-relative w-100"
-	style="background-color: rgb(36, 33, 33)">
-		<div class="d-flex justify-content-center align-items-center">
-			<div class="info-element">
-				<h3 class="text-center" style="color: rgb(15, 47, 224)">
-                    ¿Qué es AstroLove?</h3>
-			</div>
-			<div class="info-element">
-				<p class="text-center"style="color: rgb(15, 47, 224)">Tu mejor opción para
-                    adentrarte en el mundo de la astronomía</p>
-			</div>			
+    </div>-->
+<div class="container-fluid" style="background-color:black;">
+	<div class="row">
+		<div class="col-6">
+			<img class="img-fluid"
+			src="static\video_inicio\planet.jpg"/>
 		</div>
-</div>
-<div class="div-inicio d-flex justify-content-center align-items-center position-relative w-100"
-	style="background-color: rgb(56, 24, 199)">
-		<div class="d-flex justify-content-center align-items-center">
-			<div class="info-element">
-				<h3 class="text-center" style="color: white">
-                    Publica  tus fotos para que la gente las pueda apreciar</h3>
-			</div>
-			<div class="info-element">
-				<p class="text-center"style="color: white">¡Sé la persona con mas likes!</p>
-			</div>			
+		<div class="col-6 my-auto">
+			<h1 class="text-center text-white">
+				¿Qué es AstrOLOve?			
+			</h1>
+			<p class="my-5 text-center text-white">
+				Tu mejor opción para adentrarte en el mundo de la astronomía
+			</p>
 		</div>
+	</div>
 </div>
-<div class="div-inicio d-flex justify-content-center align-items-center position-relative w-100"
-	style="background-color: rgb(36, 33, 33)">
-		<div class="d-flex justify-content-center align-items-center">
-			<div class="info-element">
-				<h3 class="text-center" style="color: rgb(15, 47, 224)">
-                    Conoce personas</h3>
+<div class="container-fluid">
+	<div class="row" id="parallax-inicio">
+		<h1 class="text-white text-center my-auto">
+			Publica  tus fotos para que la gente las pueda apreciar
+		</h1>
+	
+	</div>
+</div>
+
+<div class="container-fluid py-5" style="background-color:black;">
+	<div class="row" style="background-color:black;">
+		<h2 class="text-center text-white my-5">Conecta con otros usuarios</h2>
+		<div class="col-4">
+			<div class="row my-3">	
+				<i class="fad fa-users fa-3x text-center mx-auto" style="color:rgb(255, 255, 255)"></i>
 			</div>
-			<div class="info-element">
-				<p class="text-center"style="color: rgb(15, 47, 224)">Chatea con nuevas personas para o 
-                    unete a eventos para disfrutar del cielo en compañia</p>
-			</div>			
+			<h3 class="text-center my-4 text-white ">Chatea con nuevas personas</h3>
 		</div>
+		<div class="col-4">
+			<div class="row my-3">
+				<i class="fad fa-calendar fa-3x text-center mx-auto" style="color:rgb(255, 255, 255)"></i>
+			</div>
+			<h3 class="text-center my-4  text-white">Únete a eventos</h3>
+		</div>
+		<div class="col-4">
+			<div class="row my-3">
+				<i class="fad fa-star-shooting fa-3x text-center mx-auto" style="color:rgb(255, 255, 255)"></i>
+			</div>
+			<h3 class="text-center my-4  text-white">Disfruta el cielo con compañía</h3>
+		</div>	
+	</div>
 </div>
+
 
 {% endblock %}

@@ -1,21 +1,32 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
 
-<style>
-body {
-  height: 800px;
-  background-image: url("https://secure.static.tumblr.com/3d78d82495496789da6ff50e04ae67d3/wxhldnz/mb5nctknl/tumblr_static_tumblr_static_722loy9z270gggo0okg4w0occ_640.jpg");
-  background-size: cover;
-  background-size: 105rem;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-attachment: fixed;
-  } 
-</style>
-<div class="container my-5">
+
+<div class="container-fluid py-5" id="background2">
     <div class="row text-center my-3">
-        <h1>Eventos</h1>
+        <h1 class="text-white">Eventos</h1>
         <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/eventos/create/">Nuevo evento</a></button>
+    </div>
+    <div class="container">
+        <form id='form' method='get'>
+            <div class="row">
+                {% for field in eventFilter.form %}
+                <div class="col-6 my-1 filter-row text-left">
+                    <p class="text-white">{{field.label}}</p>
+                    {{field}}
+                </div>
+
+                {% endfor %}
+                <div class="col-6 mt-2 ">
+                    <div class="row">
+                        <input type='submit' class="page-link w-25" value='Filtrar'/>
+                        <a href="/eventos/" class="btn btn-danger w-25 rounded-0 ml-2">
+                            Borrar filtros
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
     {% for evento, length in items %}
     <!--TIENES QUE LLAMAR AL NOMBRE DE LA VARIABLE QUE HAS PUESTO EN EL CONTROLADOR-->
@@ -30,6 +41,9 @@ body {
                     / {{evento.date | date:'d-m-Y H:i'}}</h6>
                 <h6 class="card-subtitle mb-2 text-muted"><strong>Número de participantes: </strong>{{length}}</h6>
                 <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/eventos/show/{{evento.id}}">Ver detalles</a></button>
+                {% if user.is_staff %}
+                <button class="btn btn-danger w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/eventos/delete/{{evento.id}}">Borrar evento</a></button>
+                {% endif %}
             </div>
         </div>
     </div>

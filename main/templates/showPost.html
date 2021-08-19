@@ -7,9 +7,9 @@
     }
 </style>
 
-<div class="container my-5">
+<div class="container-fluid py-5" id="background5">
     <div class="row text-center my-3">
-        <h1>{{post.title}}</h1>
+        <h1 class="text-white">{{post.title}}</h1>
     </div>
     <div class="row justify-content-center my-5">
         <div class="card w-50">
@@ -57,7 +57,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <p class="mx-4">{{comment.content}}</p>
+                    <div class="col-10">
+                        <p class="mx-4">{{comment.content}}
+
+                    </div>
+                    <div class="col-2">
+                        {% if user.is_staff %}
+                        <button class="btn btn-danger w-25 mx-auto"><a class="text-white text-decoration-none" href="/comment/delete/{{comment.id}}">B</a></button>
+                        {% endif %}
+                    </div>
+                    </p>
                 </div>
                 {% endfor %}
             </div>

@@ -1,0 +1,85 @@
+#parallax-inicio {
+    background-image: url("video_inicio/like.jpg");
+  
+    /* Full height */
+    height: 60%;
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  #background1 {
+    background-image: url("video_inicio/background1.jpg");
+  
+    /* Full height */  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  #background2 {
+    background-image: url("video_inicio/background2.jpg");
+  
+    /* Full height */  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  #background3 {
+    background-image: url("video_inicio/background3.jpg");
+  
+    /* Full height */
+  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  #background4 {
+    background-image: url("video_inicio/background4.jpg");
+  
+    /* Full height */  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  #background5 {
+    background-image: url("video_inicio/background5.jpg");
+  
+    /* Full height */  
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  @font-face {
+    font-family: 'BaronNeue-Black';
+    src: local('BaronNeue-Black'),
+         url('../static/fonts/BaronNeue-Black.otf') format("truetype");
+  }
+  h1,h2,h3,h4{
+    font-family: 'BaronNeue-Black';
+
+  }
+
+  
+  @font-face {
+    font-family:'Merriweather-Regular';
+    src: local('Merriweather-Regular'),
+         url('../static/fonts/Merriweather-Regular.ttf') format("truetype");
+  }
+  p,h5,h6{
+    font-family: 'Merriweather-Regular';
+
+  }

@@ -27,13 +27,17 @@ urlpatterns = [
     path('chats/', views.chats),
     path('eventos/', views.eventos),
     path('eventos/create/', views.create_evento),
-    path('eventos/show/<int:id>', views.show_evento),
+    path('eventos/delete/<int:id>/', views.delete_evento),
+    path('eventos/show/<int:id>/', views.show_evento),
     path('eventos/new_user/<int:evento_id>/<int:user_id>/', views.new_apuntado),
     path('informacion/', views.informacion),
     path('logout/', views.logout),
     path('perfil/update/', views.modificarPerfil),
     path('posts/create/', views.create_post),
     path('posts/show/<int:id>/', views.show_post),
+    path('posts/delete/<int:id>/', views.delete_post),
+    path('comment/delete/<int:id>/', views.delete_comment),
+
 
 
 ]
