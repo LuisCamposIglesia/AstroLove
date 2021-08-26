@@ -25,6 +25,7 @@ urlpatterns = [
     path('perfil/', views.perfil),
     path('posts/', views.posts),
     path('chats/', views.chats),
+    path('chats/<int:user_id>/<int:my_id>/', views.room),
     path('eventos/', views.eventos),
     path('eventos/create/', views.create_evento),
     path('eventos/delete/<int:id>/', views.delete_evento),

@@ -141,6 +141,24 @@ def chats(request):
     return render(request, 'chats.html', {'usuarios':usuarios, 'chatFilter':chatFilter, 'user':request.user})
 
 @login_required
+def room(request, user_id, my_id):
+    usuarios = Usuario.objects.all()
+    chatFilter = ChatFilter(
+                request.GET, queryset=usuarios)
+    usuarios = chatFilter.qs
+    usuario = Usuario.objects.get(user__id=user_id)
+    i_usuario =  Usuario.objects.get(user__id=my_id)
+    room_id = ""
+    author = i_usuario.nombreCompleto
+    if user_id > my_id:
+        room_id = str(user_id) + str(my_id)
+    else:
+        room_id = str(my_id) + str(user_id)
+    return render(request, 'chats.html', {'room_id':room_id, 'chatFilter':chatFilter, 'usuario_chat':usuario,'usuarios':usuarios, 'i_usuario':i_usuario
+    , "author": author})
+
+
+@login_required
 def perfil(request):
     usuario = Usuario.objects.get(user=request.user)
     return render(request, 'perfil.html', {"usuario":usuario})

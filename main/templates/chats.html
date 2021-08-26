@@ -16,7 +16,8 @@
                 {% endfor %}
                 <div class="col-4">
                     <div class="row">
-                        <input type='submit' class="btn btn-primary w-50" value='Filtrar'/>
+                        <input type='submit' class="btn btn-primary w-50"
+                            value='Filtrar'/>
                         <a href="/chats/" class="btn btn-danger w-25 rounded-0">
                             Borrar filtros
                         </a>
@@ -26,11 +27,15 @@
         </form>
     </div>
     <div class="row my-3">
-        <div class="col-6 border">
-        {% for usuario in usuarios %}
-        {% if usuario.user.first_name %}
-        <div class="row border py-3">
-            <div class="col-4" style="background:
+
+        <div class="col-6 border bg-light">
+            {% for usuario in usuarios %}
+            {% if usuario.user.first_name %}
+            {% if usuario.user != user%}
+            <a class="text-decoration-none"
+                href="/chats/{{usuario.user.id}}/{{user.id}}">
+                <div class="row border px-3 py-3">
+                    <div class="col-4" style="background:
                         url(http://127.0.0.1:8000/{{usuario.profilePicUrl}})
                         50% 50% no-repeat; /* 50% 50% centers image in div */
                         width: 30px;
@@ -38,15 +43,73 @@
                         background-size: cover;">
 
                     </div>
-            <div class="col-8">
-                <p class="my-auto"> {{usuario.user.first_name}} {{usuario.user.last_name}}</p>
+                    <div class="col-8">
+                        <p class="my-auto text-dark"> {{usuario.user.first_name}}
+                            {{usuario.user.last_name}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="col-6 border text-center bg-light">
+            {% if room_id %}
+            <div class="row">
+                    <div class="col-4 my-3 mx-5" style="background:
+                    url(http://127.0.0.1:8000/{{usuario_chat.profilePicUrl}})
+                    50% 50% no-repeat; /* 50% 50% centers image in div */
+                    width: 50px;
+                    height: 50px;
+                    background-size: cover;">
+                </div>
+                <div class="col-8">
+                    <h5 class="text-dark my-4">{{usuario_chat.user.first_name}} {{usuario_chat.user.last_name}}</h5>
+                </div>
             </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-        </div>
-        <div class="col-6 border text-center">
+            <textarea id="chat-log" cols="60" rows="20"></textarea><br>
+            <input id="chat-message-input" type="text" size="56" class="my-2"><br>
+            <input id="chat-message-submit" type="button"  class="my-2 btn btn-primary" value="Enviar">
+            <script>
+        const roomName = {{room_id}}
+
+        const chatSocket = new WebSocket(
+            'ws://'
+            + window.location.host
+            + '/ws/chat/'
+            + roomName
+            + '/'
+        );
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+        };
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+
+        document.querySelector('#chat-message-input').focus();
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'message': "{{author}}:" + message
+            }));
+            messageInputDom.value = '';
+        };
+    </script>
+            {% else %}
             <h6 class="">Pulsa en un usuario para comenzar a chatear.</h6>
+            {% endif %}
         </div>
     </div>
 </div>
