@@ -141,7 +141,7 @@ CHANNEL_LAYERS = {
     },
 }
 PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-STATIC_ROOT = normpath(join(BASE_DIR, 'static'))
+STATIC_ROOT = normpath(join(BASE_DIR, 'assets'))
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     normpath(join(BASE_DIR, 'static')),
