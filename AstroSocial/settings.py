@@ -140,10 +140,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-STATIC_ROOT = normpath(join(BASE_DIR, 'assets'))
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    normpath(join(BASE_DIR, 'static')),
-)#  Add configuration for static files storage using whitenoise
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
