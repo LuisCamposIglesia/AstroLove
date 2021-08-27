@@ -16,11 +16,16 @@
                 <h5 class="card-title">{{post.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">{{post.creator.nombreCompleto}}
                     / {{post.date | date:'d-m-Y H:i'}}</h6>
-                <h5 class=""> <i class="fal fa-heart"></i>
-                    {{likes }}</h5>
-                <button class="btn btn-primary w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/posts/show/{{post.id}}">Ver comentarios</a></button>
+                {% if likes.1 == True %}
+                    <a href="/posts/{{post.id}}/dislike/" class="text-decoration-none text-dark"> <i style="color: red;" class="fal fa-heart"></i>
+                    {{likes.2}}</a>
+                {% else %}
+                <a href="/posts/{{post.id}}/like/"  class="text-decoration-none text-dark"> <i style="color: black;" class="fal fa-heart"></i>
+                    {{likes.2}}</a>
+                {% endif %}
+                <button class="btn btn-primary w-25 mx-auto mx-4 my-2"><a class="text-white text-decoration-none" href="/posts/show/{{post.id}}">Ver comentarios</a></button>
                 {% if user.is_staff %}
-                <button class="btn btn-danger w-25 mx-auto my-2"><a class="text-white text-decoration-none" href="/posts/delete/{{post.id}}">Borrar</a></button>
+                <button class="btn btn-danger w-25 mx-auto  mx-4 my-2"><a class="text-white text-decoration-none" href="/posts/delete/{{post.id}}">Borrar</a></button>
                 {% endif %}
             </div>
         </div>

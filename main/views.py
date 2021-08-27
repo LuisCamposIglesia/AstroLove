@@ -78,8 +78,13 @@ def informacion(request):
 def posts(request):
     posts = Post.objects.all().order_by('-date')
     likes = []
+    liked = False
     for post in posts:
-        likes.append(len(Like.objects.filter(post=post)))
+        post_likes = (Like.objects.filter(post=post))
+        for like in post_likes:
+            if like.user.user == request.user:
+                liked = True
+        likes.append([post_likes, liked, len(post_likes)])
     items = zip(posts, likes)
     return render(request, 'posts.html', {'items':items})
 
@@ -104,6 +109,10 @@ def create_post(request):
 def show_post(request, id):
     post = Post.objects.get(id=id)
     likes = len(Like.objects.filter(post=post))
+    is_liked = False
+    for like in Like.objects.filter(post=post):
+        if like.user.user == request.user:
+            is_liked = True
     comments = Comment.objects.filter(post=post).order_by('-time')
     if request.method == "POST":
         form = CreateCommentForm(request.POST, request.FILES)
@@ -115,9 +124,26 @@ def show_post(request, id):
             comment.save()
             return redirect("/posts/show/" + str(post.id)+"/")
         else:
-            return render(request, 'showPost.html', {'post':post, 'likes':likes, 'comments':comments, 'form':form})
+            return render(request, 'showPost.html', {'post':post, 'is_liked': is_liked,'likes':likes, 'comments':comments, 'form':form})
     form = CreateCommentForm()
-    return render(request, 'showPost.html', {'post':post, 'likes':likes, 'comments':comments, 'form':form})
+    return render(request, 'showPost.html', {'post':post, 'is_liked': is_liked, 'likes':likes, 'comments':comments, 'form':form})
+
+@login_required
+def like_post(request,id):
+    post = Post.objects.get(id=id)
+    user = Usuario.objects.get(user=request.user)
+    like = Like(post=post, user=user)
+    like.save()
+    return redirect("/posts/show/"+str(post.id)+"/")
+
+@login_required
+def dislike_post(request,id):
+    post = Post.objects.get(id=id)
+    user = Usuario.objects.get(user=request.user)
+    like = Like.objects.filter(user=user, post=post)
+    like.delete()
+    return redirect("/posts/")
+
 
 
 @login_required

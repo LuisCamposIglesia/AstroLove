@@ -36,6 +36,8 @@ urlpatterns = [
     path('perfil/update/', views.modificarPerfil),
     path('posts/create/', views.create_post),
     path('posts/show/<int:id>/', views.show_post),
+    path('posts/<int:id>/like/', views.like_post),
+    path('posts/<int:id>/dislike/', views.dislike_post),
     path('posts/delete/<int:id>/', views.delete_post),
     path('comment/delete/<int:id>/', views.delete_comment),
 
