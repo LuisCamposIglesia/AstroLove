@@ -1,0 +1,35 @@
+{% extends 'header_logged.html' %}
+{% block contenido %}
+
+
+<div class="container-fluid py-5" id="background2" style="min-height: 40rem;">
+    <div class="row my-5">
+        <h1 class="text-white text-center">LISTADO DE uSuARIOS</h1>
+    </div>
+    {% for usuario in usuarios %}
+    {% if not usuario.user.is_staff %}
+    <div class="row mx-4 my-4">
+        <div
+            class="col-4"
+            style="background:
+                        url(https://astrolove.herokuapp.com/{{usuario.profilePicUrl}})
+                        50% 50% no-repeat; /* 50% 50% centers image in div */
+                        width: 40px;
+                        height: 50px;
+                        background-size: cover;"
+          >
+
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <h5 class="text-white my-2 w-50">{{usuario.nombreCompleto}}</h5>
+                <a href="/userlist/delete/{{usuario.id}}/" class="btn btn-danger text-decoration-none" style="width:12% !important">Borrar usuario</a>
+            </div>
+
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
+{% endblock %}

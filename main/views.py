@@ -65,12 +65,13 @@ def login(request):
         else:
             return render(request, 'login.html', {'form': form})
     form = UserLoginForm()
-    return render(request, 'registro.html',{'form': form})
+    return render(request, 'login.html',{'form': form})
 
 @login_required
 def home(request):
     usuario = request.user
     return render(request, 'home.html',{'usuario':usuario})
+
 
 @login_required
 def informacion(request):
@@ -94,6 +95,29 @@ def informacion(request):
     else:
         form = SearchInfo()
         return render(request, 'informacion.html', {'form':form})
+
+def informacion2(request):
+    if request.method == "POST":
+        form = SearchInfo(request.POST, request.FILES)
+        if form.is_valid():
+            info = form.cleaned_data['info']
+            url = 'https://api.le-systeme-solaire.net/rest/bodies/'+info+"/"
+            try:
+                response = urllib.request.urlopen(url)
+                data = json.loads(response.read())
+                form = SearchInfo()
+                if data:
+                    return render(request, 'informacion2.html', {'data':data, 'form':form})
+                else:
+                    error_message = "No se ha encontrado registros de "+ info+"."
+                    return render(request, 'informacion2.html', {'form':form,'error_message':error_message})
+            except:
+                error_message = "No se ha encontrado registros de "+ info+"."
+                return render(request, 'informacion2.html', {'form':form,'error_message':error_message})
+    else:
+        form = SearchInfo()
+        return render(request, 'informacion2.html', {'form':form})
+
 
 @login_required
 def posts(request):
@@ -279,10 +303,6 @@ def create_evento(request):
     return render(request, 'createEvento.html',{'form': form})
 
 
-
-
-
-
 @login_required
 def delete_evento(request, id):
     evento = Evento.objects.get(id=id)
@@ -308,9 +328,24 @@ def new_apuntado(request, evento_id, user_id):
         evento.save()
     return redirect("/eventos/show/"+str(evento.id))
 
+@login_required
+def userlist(request):
+    if request.user.is_staff:
+        usuarios = Usuario.objects.all()
+        return render(request, 'userlist.html', {'usuarios':usuarios})
+    else:
+        return redirect("/home")
+@login_required
+def delete_user(request, id):
+    if request.user.is_staff:
+        usuario = Usuario.objects.get(id=id)
+        usuario.delete()
+        return redirect("/userlist/")
+    return redirect("/home")
 
 @login_required
 def logout(request):
     do_logout(request)
     response = redirect('/')
     return response
+
