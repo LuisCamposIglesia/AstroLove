@@ -83,7 +83,6 @@ def informacion(request):
                 response = urllib.request.urlopen(url)
                 data = json.loads(response.read())
                 form = SearchInfo()
-                print("Llega")
                 if data:
                     return render(request, 'informacion.html', {'data':data, 'form':form})
                 else:

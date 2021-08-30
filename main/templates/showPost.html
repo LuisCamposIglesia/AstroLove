@@ -12,7 +12,7 @@
         <h1 class="text-white">{{post.title}}</h1>
     </div>
     <div class="row justify-content-center my-5">
-        <div class="card w-50">
+        <div class="card w-50 bg-transparent text-white border-0">
             <img class="card-img-top w-50 img-fluid mx-auto"
                 src="https://astrolove.herokuapp.com/{{post.photo}}"
                 alt="Card image cap">
@@ -21,10 +21,10 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{post.creator.nombreCompleto}}
                     / {{post.date | date:'d-m-Y H:i'}}</h6>
                     {% if is_liked == True %}
-                    <a href="/posts/{{post.id}}/dislike/" class="text-decoration-none text-dark"> <i style="color: red;" class="fal fa-heart"></i>
+                    <a href="/posts/{{post.id}}/dislike/" class="text-decoration-none text-white"> <i style="color: red;" class="fal fa-heart"></i>
                     {{likes}}</a>
                 {% else %}
-                <a href="/posts/{{post.id}}/like/"  class="text-decoration-none text-dark"> <i style="color: black;" class="fal fa-heart"></i>
+                <a href="/posts/{{post.id}}/like/"  class="text-decoration-none text-white"> <i style="color: white;" class="fal fa-heart"></i>
                     {{likes}}</a>
                 {% endif %}
                 <form id='form' method='post' class="w-100">

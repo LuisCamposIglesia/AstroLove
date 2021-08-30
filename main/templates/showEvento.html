@@ -11,7 +11,7 @@
     <h1 class="text-white">{{evento.title}}</h1>
   </div>
   <div class="row justify-content-center my-5">
-    <div class="card w-50">
+    <div class="card w-50 bg-transparent text-white border-0">
       <img
         class="card-img-top w-50 img-fluid mx-auto"
         src="https://astrolove.herokuapp.com/{{evento.photo}}"
@@ -19,11 +19,11 @@
       />
       <div class="card-body text-justify">
         <h5 class="card-title">{{evento.title}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
+        <h6 class="card-subtitle mb-2 text-white">
           {{evento.date | date:'d-m-Y H:i'}}
         </h6>
-        <h5 class="card-subtitle mb-2 text-muted">{{evento.description}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">
+        <h5 class="card-subtitle mb-2 text-white">{{evento.description}}</h5>
+        <h6 class="card-subtitle mb-2 text-white">
           <strong>Apuntados: </strong>
         </h6>
         {% for apuntado in apuntados %}
@@ -38,7 +38,7 @@
                         background-size: cover;"
           ></div>
           <div class="col-8">
-            <h6 class="card-subtitle mb-2 text-muted">
+            <h6 class="card-subtitle mb-2 text-white">
               {{apuntado.nombreCompleto}}
             </h6>
           </div>

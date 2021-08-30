@@ -40,6 +40,9 @@
         <p><strong>¿Es un planeta?:</strong> No</p>
     </div>
     {% endif %} 
+    {% if data.discoveryDate %}
+        <p><strong>Fecha de descubrimiento:</strong> {{data.discoveryDate}}</p>
+    {% endif %}
     {% if data.moons %}
     <div class="row">
         <p><strong>Lunas: </strong></p>
@@ -57,13 +60,16 @@
         <p><strong>Volumen:</strong> {{data.vol.volValue}}*10^{{data.vol.volExponent}} m3</p>
     </div>
     <div class="row">
-        <p><strong>Inclinación:</strong> {{data.inclination}}</p>
+        <p><strong>Inclinación:</strong> {{data.inclination}}º</p>
     </div>
     <div class="row">
-        <p><strong>Densidad:</strong> {{data.density}}</p>
+        <p><strong>Densidad:</strong> {{data.density}} kg/m3</p>
     </div>
     <div class="row">
-        <p><strong>Gravedad:</strong> {{data.gravity}}</p>
+        <p><strong>Gravedad:</strong> {{data.gravity}} m/s</p> 
+    </div>
+    <div class="row">
+        <p><strong>Radio:</strong> {{data.meanRadius}} km</p> 
     </div>
     {% endif %}
 

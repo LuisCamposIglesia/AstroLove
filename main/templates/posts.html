@@ -8,7 +8,7 @@
     </div>
     {% for post, likes in items %}
     <div class="row justify-content-center my-5">
-        <div class="card w-50">
+        <div class="card w-50 text-white bg-transparent border-0">
             <img class="card-img-top w-50 img-fluid mx-auto"
                 src="https://astrolove.herokuapp.com/{{post.photo}}"
                 alt="Card image cap">
@@ -17,10 +17,10 @@
                 <h6 class="card-subtitle mb-2 text-muted">{{post.creator.nombreCompleto}}
                     / {{post.date | date:'d-m-Y H:i'}}</h6>
                 {% if likes.1 == True %}
-                    <a href="/posts/{{post.id}}/dislike/" class="text-decoration-none text-dark"> <i style="color: red;" class="fal fa-heart"></i>
+                    <a href="/posts/{{post.id}}/dislike/" class="text-decoration-none text-white"> <i style="color: red;" class="fal fa-heart"></i>
                     {{likes.2}}</a>
                 {% else %}
-                <a href="/posts/{{post.id}}/like/"  class="text-decoration-none text-dark"> <i style="color: black;" class="fal fa-heart"></i>
+                <a href="/posts/{{post.id}}/like/"  class="text-decoration-none text-white"> <i style="color: white;" class="fal fa-heart"></i>
                     {{likes.2}}</a>
                 {% endif %}
                 <button class="btn btn-primary w-25 mx-auto mx-4 my-2"><a class="text-white text-decoration-none" href="/posts/show/{{post.id}}">Ver comentarios</a></button>
