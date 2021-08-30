@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-nh3hs3s2cql5_^z9(re%ah_-(2)4z$d7gau)dc6c*x568ci&1=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['astrolove.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 

@@ -7,6 +7,8 @@ from django.contrib.auth import login as do_login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as do_logout
 from datetime import datetime    
+import urllib, json
+
 
 
 
@@ -72,7 +74,27 @@ def home(request):
 
 @login_required
 def informacion(request):
-    return render(request, 'informacion.html')
+    if request.method == "POST":
+        form = SearchInfo(request.POST, request.FILES)
+        if form.is_valid():
+            info = form.cleaned_data['info']
+            url = 'https://api.le-systeme-solaire.net/rest/bodies/'+info+"/"
+            try:
+                response = urllib.request.urlopen(url)
+                data = json.loads(response.read())
+                form = SearchInfo()
+                print("Llega")
+                if data:
+                    return render(request, 'informacion.html', {'data':data, 'form':form})
+                else:
+                    error_message = "No se ha encontrado registros de "+ info+"."
+                    return render(request, 'informacion.html', {'form':form,'error_message':error_message})
+            except:
+                error_message = "No se ha encontrado registros de "+ info+"."
+                return render(request, 'informacion.html', {'form':form,'error_message':error_message})
+    else:
+        form = SearchInfo()
+        return render(request, 'informacion.html', {'form':form})
 
 @login_required
 def posts(request):

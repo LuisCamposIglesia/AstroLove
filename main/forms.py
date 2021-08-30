@@ -38,3 +38,5 @@ class CreateEventoForm(forms.Form):
     description = forms.CharField(label="Descripción", widget=forms.Textarea(attrs={'placeholder': 'Descripción'}))
     photo = forms.ImageField(label="Foto de la publicación", required=True)
 
+class SearchInfo(forms.Form):
+    info = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Buscar'}))

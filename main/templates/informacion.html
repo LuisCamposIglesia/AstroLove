@@ -1,8 +1,71 @@
 {% extends 'header_logged.html' %}
 {% block contenido %}
-<div class="container my-5 text-center">
+<div class="container-fluid py-5 text-center text-white" id="background5">
     <div class="row">
         <h1>INFORMACION</h1>
+        <h5>Aquí podrás encontrar información sobre otros astros del planeta.</h5>
+        <h6 class="text-muted">Ten en cuenta que estamos buscando información a nivel universal, por lo tanto búscala en inglés.</h6>
     </div>
+    {% if error_message %}
+    <div class="alert alert-danger" role="alert">
+        {{error_message}}
+    </div>
+    {% endif %}
+    <form id='form' id='form' method='post'>
+        {% csrf_token %}
+        <div class="row">
+            {% for field in form %}
+            <div class="col-6 my-3 filter-row text-left">
+                {{field}}
+            </div>
+
+            {% endfor %}
+            <div class="col-6 mt-2 ">
+                <div class="row">
+                    <input type='submit' class="page-link w-25" value='Buscar'/>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% if data %}
+    <div class="row">
+        <p><strong>Nombre:</strong> {{data.id}}</p>
+    </div>
+    {% if data.isPlanet == True %}
+    <div class="row">
+        <p><strong>¿Es un planeta?:</strong> Sí</p>
+    </div>
+    {% else %}
+    <div class="row">
+        <p><strong>¿Es un planeta?:</strong> No</p>
+    </div>
+    {% endif %} 
+    {% if data.moons %}
+    <div class="row">
+        <p><strong>Lunas: </strong></p>
+
+
+    {% for moon in data.moons %}
+        <p><strong>- Nombre:</strong> {{moon.moon}}</p>
+    {% endfor %}
+    </div>
+    {% endif %}
+    <div class="row">
+        <p><strong>Masa:</strong> {{data.mass.massValue}}*10^{{data.mass.massExponent}} kg</p>
+    </div>
+    <div class="row">
+        <p><strong>Volumen:</strong> {{data.vol.volValue}}*10^{{data.vol.volExponent}} m3</p>
+    </div>
+    <div class="row">
+        <p><strong>Inclinación:</strong> {{data.inclination}}</p>
+    </div>
+    <div class="row">
+        <p><strong>Densidad:</strong> {{data.density}}</p>
+    </div>
+    <div class="row">
+        <p><strong>Gravedad:</strong> {{data.gravity}}</p>
+    </div>
+    {% endif %}
+
 </div>
 {% endblock %}
