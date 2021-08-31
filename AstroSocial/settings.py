@@ -136,10 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/login'
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-        #'CONFIG': {
-        #    "hosts": [('http://astrolove.herokuapp.com/', 6379)],
-        #},
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('http://astrolove.herokuapp.com/', 6379)],
+        },
     },
 }
 STATIC_URL = '/static/'
