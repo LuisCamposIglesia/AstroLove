@@ -340,6 +340,7 @@ def delete_user(request, id):
     if request.user.is_staff:
         usuario = Usuario.objects.get(id=id)
         usuario.delete()
+        usuario.user.delete ()
         return redirect("/userlist/")
     return redirect("/home")
 
