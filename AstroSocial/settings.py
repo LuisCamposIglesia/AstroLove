@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-    'channels',
-    'selenium']
+    'channels']
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
