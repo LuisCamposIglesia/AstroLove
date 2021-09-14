@@ -28,7 +28,7 @@
     </div>
     <div class="row my-3">
 
-        <div class="col-6 border bg-light">
+        <div class="col-6 border bg-transparent">
             {% for usuario in usuarios %}
             {% if usuario.user.first_name %}
             {% if usuario.user != user%}
@@ -44,7 +44,7 @@
 
                     </div>
                     <div class="col-8">
-                        <p class="my-auto text-dark"> {{usuario.user.first_name}}
+                        <p class="my-auto text-white"> {{usuario.user.first_name}}
                             {{usuario.user.last_name}}</p>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
             {% endfor %}
         </div>
 
-        <div class="col-6 border text-center bg-light">
+        <div class="col-6 border text-center bg-transparent">
             {% if room_id %}
             <div class="row">
                     <div class="col-4 my-3 mx-5" style="background:
@@ -65,7 +65,7 @@
                     background-size: cover;">
                 </div>
                 <div class="col-8">
-                    <h5 class="text-dark my-4">{{usuario_chat.user.first_name}} {{usuario_chat.user.last_name}}</h5>
+                    <h5 class="text-white my-4">{{usuario_chat.user.first_name}} {{usuario_chat.user.last_name}}</h5>
                 </div>
             </div>
             <textarea id="chat-log" cols="60" rows="20"></textarea><br>
